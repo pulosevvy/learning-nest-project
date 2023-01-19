@@ -9,7 +9,7 @@ export class ReviewController {
 
     constructor(private readonly reviewService: ReviewService) {}
 
-    @Post()
+    @Post('create')
     async create(@Body() dto: CreateReviewDto) {
         return this.reviewService.create(dto);
     }

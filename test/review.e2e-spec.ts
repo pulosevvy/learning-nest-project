@@ -4,6 +4,7 @@ import * as request from "supertest";
 import { AppModule } from "./../src/app.module";
 import { CreateReviewDto } from "../src/review/dto/create-review.dto";
 import { Types, disconnect } from "mongoose";
+import DoneCallback = jest.DoneCallback;
 
 const productId = new Types.ObjectId().toHexString();
 

@@ -3,11 +3,9 @@ import { Type } from "class-transformer";
 import { ApiProperty } from "@nestjs/swagger";
 
 class ProductCharacteristicsDto {
-    @ApiProperty({example: 'Hoodie', description: 'Name For Characteristics'})
     @IsString()
     name: string;
 
-    @ApiProperty({example: 'Kofta', description: 'Value For Characteristics'})
     @IsString()
     value: string;
 }
@@ -57,6 +55,7 @@ export class CreateProductDto {
     @IsString({each: true})
     tags: string[];
 
+    @ApiProperty({example: 'name: Test Name, Value: Test Value', description: 'Product Character. Array'})
     @ValidateNested()
     @IsArray()
     @Type(() => ProductCharacteristicsDto)

@@ -7,7 +7,7 @@ import {
     NotFoundException,
     Param,
     Patch,
-    Post,
+    Post, UseGuards,
     UsePipes, ValidationPipe
 } from "@nestjs/common";
 import { ProductModel } from "./product.model";
@@ -16,13 +16,17 @@ import { CreateProductDto } from "./dto/create-product.dto";
 import { ProductService } from "./product.service";
 import { PRODUCT_NOT_FOUND_ERROR } from "./product.constants";
 import { IdValidationPipe } from "../pipes/id-validation.pipe";
-import { ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { JwtAuthGuard } from "../auth/guards/jwt.guard";
 
+
+@ApiTags('Product')
 @Controller("product")
 export class ProductController {
 
     constructor(private readonly productService: ProductService) {}
 
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({summary: 'Create Product'})
     @ApiResponse({status: 200})
     @Post("create")
@@ -30,6 +34,7 @@ export class ProductController {
         return this.productService.create(dto);
     }
 
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({summary: 'Get One Product'})
     @ApiResponse({status: 200})
     @Get(":id")
@@ -42,6 +47,7 @@ export class ProductController {
         return product;
     }
 
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({summary: 'Delete Product'})
     @ApiResponse({status: 200})
     @Delete(":id")
@@ -52,6 +58,7 @@ export class ProductController {
         }
     }
 
+    @UseGuards(JwtAuthGuard)
     @ApiOperation({summary: 'Update Product'})
     @ApiResponse({status: 200})
     @Patch(":id")

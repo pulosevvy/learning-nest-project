@@ -17,8 +17,9 @@ import { REVIEW_NOT_FOUND } from "./review.constants";
 import { JwtAuthGuard } from "../auth/guards/jwt.guard";
 import { UserEmail } from "../decorators/user-email.decorator";
 import { IdValidationPipe } from "../pipes/id-validation.pipe";
-import { ApiOperation, ApiResponse } from "@nestjs/swagger";
+import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 
+@ApiTags('Review')
 @Controller("review")
 export class ReviewController {
 
